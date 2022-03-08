@@ -23,14 +23,8 @@ describe("ENS Wrapper", () => {
   let registrarAddress: string;
   let resolverAddress: string;
   let reverseRegistryAddress: string;
-  let customFifsRegistrarAddress: string;
   const SimpleStorageAddr = "0x0E696947A06550DEf604e82C26fd9E493e576337"
-  let owner: string;
-  let anotherOwner: string;
 
-  const customTld: string = "doe.eth";
-  const openSubdomain: string = "open." + customTld;
-  const customSubdomain: string = "john." + customTld;
 
   const network: string = "testnet";
 
@@ -53,8 +47,6 @@ describe("ENS Wrapper", () => {
     ethersProvider = providers.getDefaultProvider(
       "http://localhost:8546"
     ) as providers.JsonRpcProvider;
-    owner = await ethersProvider.getSigner(0).getAddress();
-    anotherOwner = await ethersProvider.getSigner(1).getAddress();
     ensAddress = ensRegistryAddress;
     registrarAddress = ensRegistrarAddress;
     resolverAddress = ensResolverAddress;
@@ -63,14 +55,6 @@ describe("ENS Wrapper", () => {
     // get client
     const plugins = getPlugins(ethereum, ipfs, ensRegistryAddress);
     ownerClient = new Web3ApiClient({ plugins });
-
-    const anotherOwnerRedirects = getPlugins(
-      ethereum,
-      ipfs,
-      ensRegistryAddress,
-      anotherOwner
-    );
-    anotherOwnerClient = new Web3ApiClient({ plugins: anotherOwnerRedirects });
   });
 
   afterAll(async () => {
