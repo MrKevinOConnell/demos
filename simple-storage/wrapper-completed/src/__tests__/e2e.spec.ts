@@ -15,14 +15,9 @@ describe("ENS Wrapper", () => {
   // We will have two clients because we need two
   // different signers in order to test ENS functions
   let ownerClient: Web3ApiClient;
-  let anotherOwnerClient: Web3ApiClient;
-
   let ensUri: string;
   let ethersProvider: providers.JsonRpcProvider;
   let ensAddress: string;
-  let registrarAddress: string;
-  let resolverAddress: string;
-  let reverseRegistryAddress: string;
   const SimpleStorageAddr = "0x0E696947A06550DEf604e82C26fd9E493e576337"
 
 
@@ -31,9 +26,6 @@ describe("ENS Wrapper", () => {
   beforeAll(async () => {
     const {
       ensAddress: ensRegistryAddress,
-      registrarAddress: ensRegistrarAddress,
-      resolverAddress: ensResolverAddress,
-      reverseAddress: ensReverseAddress,
       ipfs,
       ethereum,
     } = await initTestEnvironment();
@@ -48,9 +40,6 @@ describe("ENS Wrapper", () => {
       "http://localhost:8546"
     ) as providers.JsonRpcProvider;
     ensAddress = ensRegistryAddress;
-    registrarAddress = ensRegistrarAddress;
-    resolverAddress = ensResolverAddress;
-    reverseRegistryAddress = ensReverseAddress;
 
     // get client
     const plugins = getPlugins(ethereum, ipfs, ensRegistryAddress);
